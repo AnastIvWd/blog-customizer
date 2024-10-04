@@ -41,7 +41,13 @@ export const ArticleParamsForm = (props: TArticleParamsForm) => {
 		<>
 			<ArrowButton onClick={() => setFormOpen(prevState => !prevState)} isOpen={formIsOpen}/>
 			<aside className={clsx(styles.container, formIsOpen && styles.container_open)} ref={formRef} >
-				<form className={styles.form}>
+				<form
+					className={styles.form}
+					onSubmit={(event) => {
+						event.preventDefault();
+						props.onSubmit(formState)}
+					}
+				>
 					<Text as='h1' size={31} weight={800} uppercase>
 						Задайте параметры
 					</Text>
@@ -100,10 +106,6 @@ export const ArticleParamsForm = (props: TArticleParamsForm) => {
 						<Button
 							title='Применить'
 							type='submit'
-							onClick={(event) => {
-								event.preventDefault();
-								props.onSubmit(formState)}
-							}
 						/>
 					</div>
 				</form>
